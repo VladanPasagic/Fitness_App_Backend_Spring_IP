@@ -23,5 +23,6 @@ public class RegistrationRequest {
 
     private MultipartFile avatar;
 
+    @NotBlank
     private String mail;
 }

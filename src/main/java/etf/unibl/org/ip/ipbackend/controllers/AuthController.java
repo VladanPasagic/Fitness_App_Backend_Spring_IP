@@ -3,6 +3,7 @@ package etf.unibl.org.ip.ipbackend.controllers;
 
 import etf.unibl.org.ip.ipbackend.models.requests.LoginRequest;
 import etf.unibl.org.ip.ipbackend.models.requests.RegistrationRequest;
+import etf.unibl.org.ip.ipbackend.models.responses.LoginResponse;
 import etf.unibl.org.ip.ipbackend.services.AuthService;
 import etf.unibl.org.ip.ipbackend.services.UserService;
 import jakarta.validation.Valid;
@@ -19,14 +20,14 @@ public class AuthController {
 
     @PostMapping(path = "register")
     @ResponseStatus(HttpStatus.CREATED)
-    public void register(@ModelAttribute @Valid RegistrationRequest request) {
+    public void register(@RequestBody @Valid RegistrationRequest request) {
         userService.register(request);
     }
 
     @PostMapping(path = "login")
     @ResponseStatus(HttpStatus.OK)
-    public void login(@ModelAttribute @Valid LoginRequest request) {
-        authService.login(request);
+    public LoginResponse login(@RequestBody @Valid LoginRequest request) {
+        return authService.login(request);
     }
 
 }
