@@ -1,4 +1,4 @@
-package etf.unibl.org.ip.ipbackend.services.implementation;
+package etf.unibl.org.ip.ipbackend.services.implementations;
 
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;

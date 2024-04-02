@@ -1,4 +1,4 @@
-package etf.unibl.org.ip.ipbackend.configuration;
+package etf.unibl.org.ip.ipbackend.configurations;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package etf.unibl.org.ip.ipbackend.configuration;
+package etf.unibl.org.ip.ipbackend.configurations;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -17,8 +17,9 @@ public class SpringSecurityConfigurationBean {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors(cors -> cors.configurationSource(configurationBean.corsConfigurationSource()));
-
         return httpSecurity.build();
     }
+
+
 
 }
