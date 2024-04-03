@@ -23,6 +23,7 @@ public class UserServiceImpl implements UserService {
         {
             throw new ResponseStatusException(HttpStatusCode.valueOf(409));
         }
+        //save multipart file
         traineeRepository.saveAndFlush(createUserEntity(request));
     }
 

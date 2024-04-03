@@ -7,5 +7,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class LoginResponse {
     private Integer id;
-    private String jwToken;
+    private String token;
 }

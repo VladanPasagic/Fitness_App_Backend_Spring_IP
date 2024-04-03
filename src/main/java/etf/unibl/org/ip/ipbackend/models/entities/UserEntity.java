@@ -1,8 +1,6 @@
 package etf.unibl.org.ip.ipbackend.models.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -10,8 +8,10 @@ import lombok.Data;
 @Data
 public class UserEntity {
     @Id
+    @GeneratedValue
     private Integer id;
 
+    @Column(unique = true)
     private String username;
 
     private String password;
