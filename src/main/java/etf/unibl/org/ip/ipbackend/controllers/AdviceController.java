@@ -1,6 +1,6 @@
 package etf.unibl.org.ip.ipbackend.controllers;
 
-import etf.unibl.org.ip.ipbackend.models.dtos.Advice;
+import etf.unibl.org.ip.ipbackend.models.requests.AdviceRequest;
 import etf.unibl.org.ip.ipbackend.services.AdviceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,7 +14,7 @@ public class AdviceController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void advice(@RequestBody Advice advice)
+    public void advice(@RequestBody AdviceRequest advice)
     {
         adviceService.save(advice);
     }

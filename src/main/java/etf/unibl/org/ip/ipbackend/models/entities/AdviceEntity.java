@@ -1,18 +1,20 @@
 package etf.unibl.org.ip.ipbackend.models.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
+@Data
+@Table(name="advice")
 public class AdviceEntity {
     @Id
-    public Integer id;
+    @GeneratedValue
+    private Integer id;
 
     @OneToOne
-    public UserEntity user;
+    private UserEntity user;
 
-    public String title;
+    private String title;
 
-    public String text;
+    private String text;
 }
