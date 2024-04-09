@@ -8,7 +8,7 @@ import lombok.Data;
 @Table(name="advice")
 public class AdviceEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @OneToOne

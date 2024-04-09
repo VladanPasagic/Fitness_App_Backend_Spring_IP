@@ -1,10 +1,9 @@
 package etf.unibl.org.ip.ipbackend.models.dtos;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
 public class FitFact {
     private String category;
