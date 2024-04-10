@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("{base-url}/advice")
+@RequestMapping("${base-url}/advices")
 public class AdviceController {
     private final AdviceService adviceService;
 

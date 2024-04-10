@@ -1,41 +1,22 @@
-package etf.unibl.org.ip.ipbackend.models.entities;
+package etf.unibl.org.ip.ipbackend.models.dtos;
 
-import jakarta.persistence.*;
+import etf.unibl.org.ip.ipbackend.models.entities.ImageEntity;
 import lombok.Data;
 
 import java.time.OffsetTime;
 import java.util.List;
 
-@Entity
 @Data
-@Table(name = "program")
-public class TrainingProgramEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class SingleTrainingProgram {
     private Integer id;
-
     private String name;
-
     private String description;
-
-    @OneToOne
-    private CategoryEntity category;
-
+    private Category category;
     private double price;
-
     private int level;
-
     private OffsetTime time;
-
     private String location;
-
-    @OneToMany
     private List<ImageEntity> images;
-
     private String instructorInformation;
-
     private String contactNumber;
-
-    @OneToMany
-    private List<CommentEntity> comments;
 }

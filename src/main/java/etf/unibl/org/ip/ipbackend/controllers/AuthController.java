@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("${base-url}/auth")
@@ -20,7 +22,7 @@ public class AuthController {
 
     @PostMapping(path = "register")
     @ResponseStatus(HttpStatus.CREATED)
-    public void register(@RequestBody @Valid RegistrationRequest request) {
+    public void register(@RequestBody @Valid RegistrationRequest request) throws IOException {
         userService.register(request);
     }
 

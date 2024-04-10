@@ -36,6 +36,7 @@ public class EMailServiceImpl implements EMailService {
             try {
                 mailSender.send(message);
             } catch (Exception ex) {
+                System.out.println(ex.getMessage());
                 loggingService.log(LogLevel.ERROR, "Mail couldn't be sent");
             }
         });
