@@ -6,7 +6,7 @@ import java.util.List;
 
 @Data
 public class Category {
+    int id;
     String name;
-
     List<SpecificAttribute> specificAttributes;
 }

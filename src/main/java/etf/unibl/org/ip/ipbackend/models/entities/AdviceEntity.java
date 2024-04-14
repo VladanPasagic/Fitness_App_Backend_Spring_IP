@@ -5,16 +5,18 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="advice")
+@Table(name = "advice")
 public class AdviceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
-    private UserEntity user;
-
     private String title;
 
     private String text;
+
+    @OneToOne
+    private UserEntity user;
+
+    private boolean isRead;
 }

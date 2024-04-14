@@ -6,4 +6,5 @@ import lombok.Data;
 @Data
 public class SpecificAttribute {
     private String attribute;
+    private String value;
 }

@@ -12,4 +12,5 @@ public class SpecificAttributeEntity {
     private Integer id;
 
     private String attribute;
+    private String value;
 }
