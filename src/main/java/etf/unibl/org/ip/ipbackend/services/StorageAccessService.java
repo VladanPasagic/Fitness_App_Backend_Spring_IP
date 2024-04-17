@@ -7,5 +7,5 @@ import java.io.IOException;
 public interface StorageAccessService {
     String saveToFile(String fileName, byte[] content);
 
-    Resource getFileAsResource(String fileName) throws IOException;
+    Resource getFileAsResource(String fileName);
 }

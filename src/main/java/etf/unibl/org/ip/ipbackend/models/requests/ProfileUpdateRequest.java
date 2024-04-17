@@ -7,9 +7,6 @@ import org.springframework.web.multipart.MultipartFile;
 @Data
 public class ProfileUpdateRequest {
     @NotBlank
-    private Integer id;
-
-    @NotBlank
     private String mail;
 
     @NotBlank

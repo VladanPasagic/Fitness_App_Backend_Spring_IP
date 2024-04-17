@@ -31,8 +31,9 @@ public class TrainingProgramServiceImpl implements TrainingProgramService {
     }
 
     @Override
-    public void save(TrainingProgramRequest trainingProgram)
-    {
-
+    public void save(TrainingProgramRequest trainingProgram) {
+        TrainingProgramEntity entity = modelMapper.map(trainingProgram, TrainingProgramEntity.class);
+        trainingProgramRepository.save(entity);
+        //save images
     }
 }

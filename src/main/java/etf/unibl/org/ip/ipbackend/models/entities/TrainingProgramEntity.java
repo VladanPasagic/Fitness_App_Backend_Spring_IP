@@ -1,5 +1,6 @@
 package etf.unibl.org.ip.ipbackend.models.entities;
 
+import etf.unibl.org.ip.ipbackend.models.enums.ProgramLevel;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -23,7 +24,7 @@ public class TrainingProgramEntity {
 
     private double price;
 
-    private int level;
+    private ProgramLevel level;
 
     private OffsetTime time;
 

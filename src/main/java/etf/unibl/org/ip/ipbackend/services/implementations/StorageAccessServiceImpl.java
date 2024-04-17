@@ -1,12 +1,17 @@
 package etf.unibl.org.ip.ipbackend.services.implementations;
 
+import etf.unibl.org.ip.ipbackend.services.LoggingService;
 import etf.unibl.org.ip.ipbackend.services.StorageAccessService;
 import io.jsonwebtoken.io.Encoders;
 import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.logging.LogLevel;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +21,7 @@ import java.nio.file.Paths;
 import java.util.Date;
 
 @Service
+@RequiredArgsConstructor
 public class StorageAccessServiceImpl implements StorageAccessService {
     @Value("${storage.path}")
     private String storagePath;
@@ -25,6 +31,8 @@ public class StorageAccessServiceImpl implements StorageAccessService {
 
     private Path rootPath;
 
+    private final LoggingService loggingService;
+
     @PostConstruct
     private void postConstruct() {
         rootPath = Paths.get(storagePath, storageName).normalize().toAbsolutePath();
@@ -33,7 +41,7 @@ public class StorageAccessServiceImpl implements StorageAccessService {
             try {
                 Files.createDirectory(rootPath);
             } catch (IOException e) {
-                // add proper logging
+                loggingService.log(LogLevel.FATAL, "Couldn't create folder");
                 throw new RuntimeException(e);
             }
         }
@@ -48,18 +56,23 @@ public class StorageAccessServiceImpl implements StorageAccessService {
             Files.write(filePath, content);
             return filePath.toFile().getName();
         } catch (IOException e) {
-            //handle logging
+            loggingService.log(LogLevel.FATAL, "Couldn't write file");
             return null;
         }
     }
 
     @Override
-    public Resource getFileAsResource(String fileName) throws IOException {
-        Path path = getFilePath(fileName);
-        if (!Files.exists(path)) {
-            throw new IOException("File doesn't exits");
+    public Resource getFileAsResource(String fileName) {
+        try {
+            Path path = getFilePath(fileName);
+            if (!Files.exists(path)) {
+                throw new IOException("File doesn't exits");
+            }
+            return new UrlResource(path.toUri());
+        } catch (IOException ex) {
+            loggingService.log(LogLevel.INFO, "File not found");
+            throw new ResponseStatusException(HttpStatusCode.valueOf(404));
         }
-        return new UrlResource(path.toUri());
     }
 
     private Path getFilePath(String fileName) throws IOException {

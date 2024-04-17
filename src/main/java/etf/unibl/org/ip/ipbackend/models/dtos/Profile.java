@@ -9,5 +9,5 @@ public class Profile {
     private String firstName;
     private String lastName;
     private String city;
-    private MultipartFile avatar;
+    private String avatar;
 }

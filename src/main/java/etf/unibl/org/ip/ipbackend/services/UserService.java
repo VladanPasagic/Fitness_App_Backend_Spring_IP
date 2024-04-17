@@ -9,7 +9,7 @@ import java.io.IOException;
 public interface UserService {
     public void register(RegistrationRequest request) throws IOException;
 
-    public void updateProfile(ProfileUpdateRequest request);
+    public void updateProfile(Integer id, ProfileUpdateRequest request) throws IOException;
 
     public Profile getProfile(Integer id);
 }

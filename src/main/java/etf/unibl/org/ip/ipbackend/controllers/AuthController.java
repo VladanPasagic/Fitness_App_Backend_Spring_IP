@@ -22,7 +22,7 @@ public class AuthController {
 
     @PostMapping(path = "register")
     @ResponseStatus(HttpStatus.CREATED)
-    public void register(@RequestBody @Valid RegistrationRequest request) throws IOException {
+    public void register(@ModelAttribute @Valid RegistrationRequest request) throws IOException {
         userService.register(request);
     }
 

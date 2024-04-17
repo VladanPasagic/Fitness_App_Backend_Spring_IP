@@ -39,7 +39,7 @@ public class TrainingProgramController {
 
     @PostMapping("/{id}/comments")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addCommentToTrainingProgram(@RequestBody CommentRequest commentRequest) {
+    public void addCommentToTrainingProgram(@RequestBody CommentRequest commentRequest, @PathVariable String id) {
         commentService.addComment(commentRequest);
     }
 

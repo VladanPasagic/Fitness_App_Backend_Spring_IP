@@ -2,7 +2,6 @@ package etf.unibl.org.ip.ipbackend.services.implementations;
 
 import etf.unibl.org.ip.ipbackend.models.dtos.Profile;
 import etf.unibl.org.ip.ipbackend.models.entities.TraineeEntity;
-import etf.unibl.org.ip.ipbackend.models.entities.UserEntity;
 import etf.unibl.org.ip.ipbackend.models.requests.ProfileUpdateRequest;
 import etf.unibl.org.ip.ipbackend.models.requests.RegistrationRequest;
 import etf.unibl.org.ip.ipbackend.respositories.TraineeRepository;
@@ -36,7 +35,7 @@ public class UserServiceImpl implements UserService {
         }
         TraineeEntity trainee = createUserEntity(request);
         if (request.getAvatar() != null) {
-            String savedFilePath = storageAccessService.saveToFile(request.getAvatar().getName(), request.getAvatar().getBytes());
+            String savedFilePath = storageAccessService.saveToFile(request.getAvatar().getOriginalFilename(), request.getAvatar().getBytes());
             trainee.setAvatar(savedFilePath);
         }
         traineeRepository.saveAndFlush(trainee);
@@ -47,8 +46,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateProfile(ProfileUpdateRequest request) {
-
+    public void updateProfile(Integer id, ProfileUpdateRequest request) throws IOException, ResponseStatusException {
+        Optional<TraineeEntity> entity = traineeRepository.findById(id);
+        if (entity.isPresent()) {
+            TraineeEntity trainee = entity.get();
+            trainee.setFirstName(request.getFirstName());
+            trainee.setLastName(request.getLastName());
+            trainee.setMail(request.getMail());
+            trainee.setCity(request.getCity());
+            if (request.getAvatar() != null) {
+                String savedFilePath = storageAccessService.saveToFile(request.getAvatar().getOriginalFilename(), request.getAvatar().getBytes());
+                trainee.setAvatar(savedFilePath);
+            }
+            traineeRepository.saveAndFlush(trainee);
+        } else {
+            loggingService.log(LogLevel.INFO, "Trying to access non existent profile with the following id " + id);
+            throw new ResponseStatusException(HttpStatusCode.valueOf(404));
+        }
     }
 
     @Override
