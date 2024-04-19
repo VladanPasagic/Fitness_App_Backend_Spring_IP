@@ -22,6 +22,9 @@ public class TrainingProgramEntity {
     @OneToOne
     private CategoryEntity category;
 
+    @OneToOne
+    private TraineeEntity creator;
+
     private double price;
 
     private ProgramLevel level;
@@ -30,13 +33,12 @@ public class TrainingProgramEntity {
 
     private String location;
 
-    @OneToMany
-    private List<ImageEntity> images;
+    private String image;
 
     private String instructorInformation;
 
     private String contactNumber;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<CommentEntity> comments;
 }

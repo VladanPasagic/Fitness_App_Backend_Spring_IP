@@ -1,9 +1,8 @@
 package etf.unibl.org.ip.ipbackend.models.requests;
 
-import etf.unibl.org.ip.ipbackend.models.dtos.Category;
-import etf.unibl.org.ip.ipbackend.models.enums.ProgramLevel;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class TrainingProgramRequest {
@@ -14,16 +13,21 @@ public class TrainingProgramRequest {
     private String description;
 
     @NotBlank
-    private Category category;
+    private String categoryId;
 
     @NotBlank
-    private double price;
+    private String price;
 
     @NotBlank
-    private ProgramLevel level;
+    private String level;
 
     @NotBlank
     private String location;
+
+    @NotBlank
+    private String creatorId;
+
+    private MultipartFile image;
 
     private String instructorInformation;
 

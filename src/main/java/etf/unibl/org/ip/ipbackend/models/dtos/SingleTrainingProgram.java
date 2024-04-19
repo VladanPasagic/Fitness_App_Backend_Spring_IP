@@ -1,10 +1,10 @@
 package etf.unibl.org.ip.ipbackend.models.dtos;
 
-import etf.unibl.org.ip.ipbackend.models.entities.ImageEntity;
+import etf.unibl.org.ip.ipbackend.models.entities.TraineeEntity;
+import etf.unibl.org.ip.ipbackend.models.enums.ProgramLevel;
 import lombok.Data;
 
 import java.time.OffsetTime;
-import java.util.List;
 
 @Data
 public class SingleTrainingProgram {
@@ -13,10 +13,11 @@ public class SingleTrainingProgram {
     private String description;
     private Category category;
     private double price;
-    private int level;
+    private ProgramLevel level;
+    private TraineeEntity trainee;
     private OffsetTime time;
     private String location;
-    private List<ImageEntity> images;
+    private String image;
     private String instructorInformation;
     private String contactNumber;
 }
