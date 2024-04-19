@@ -3,6 +3,7 @@ package etf.unibl.org.ip.ipbackend.controllers;
 import etf.unibl.org.ip.ipbackend.models.dtos.SingleTrainingProgram;
 import etf.unibl.org.ip.ipbackend.models.dtos.TrainingProgram;
 import etf.unibl.org.ip.ipbackend.models.requests.CommentRequest;
+import etf.unibl.org.ip.ipbackend.models.requests.ParticipationRequest;
 import etf.unibl.org.ip.ipbackend.models.requests.TrainingProgramRequest;
 import etf.unibl.org.ip.ipbackend.services.CommentService;
 import etf.unibl.org.ip.ipbackend.services.TrainingProgramService;
@@ -34,6 +35,12 @@ public class TrainingProgramController {
         return trainingProgramService.getById(id);
     }
 
+    @GetMapping
+    @RequestMapping("/creator/{id}")
+    public List<TrainingProgram> getTrainingProgramsByCreatorId(@PathVariable String id) {
+        return trainingProgramService.getAllFromTrainee(Integer.parseInt(id));
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void createTrainingProgram(@ModelAttribute @Valid TrainingProgramRequest trainingProgramRequest) throws IOException {
@@ -50,6 +57,12 @@ public class TrainingProgramController {
     @RequestMapping("/creator/{id}")
     public List<TrainingProgram> getTrainingPrograms(@PathVariable String id) {
         return trainingProgramService.getAllFromTrainee(Integer.parseInt(id));
+    }
+
+    @PostMapping
+    @RequestMapping("/participate/{id}")
+    public void participateOnTrainingProgram(@PathVariable String id, @RequestBody @Valid ParticipationRequest participationRequest) {
+        trainingProgramService.participate(participationRequest.getUserId(), Integer.parseInt(id));
     }
 
 }

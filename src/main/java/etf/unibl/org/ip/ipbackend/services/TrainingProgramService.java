@@ -16,4 +16,6 @@ public interface TrainingProgramService {
     SingleTrainingProgram getById(int id);
 
     void save(TrainingProgramRequest trainingProgramRequest) throws IOException;
+
+    void participate(int userId, int trainingProgramId);
 }

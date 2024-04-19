@@ -19,10 +19,10 @@ public class TrainingProgramEntity {
 
     private String description;
 
-    @OneToOne
+    @ManyToOne
     private CategoryEntity category;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private TraineeEntity creator;
 
     private double price;
@@ -31,7 +31,10 @@ public class TrainingProgramEntity {
 
     private OffsetTime time;
 
-    private String location;
+    @OneToOne(fetch = FetchType.EAGER)
+    private LocationEntity location;
+
+    private boolean active;
 
     private String image;
 

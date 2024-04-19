@@ -22,7 +22,10 @@ public class TrainingProgramRequest {
     private String level;
 
     @NotBlank
-    private String location;
+    private String locationId;
+
+    @NotBlank
+    private String locationName;
 
     @NotBlank
     private String creatorId;

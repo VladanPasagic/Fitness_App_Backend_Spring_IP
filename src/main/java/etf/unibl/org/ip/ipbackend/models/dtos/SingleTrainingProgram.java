@@ -14,7 +14,7 @@ public class SingleTrainingProgram {
     private Category category;
     private double price;
     private ProgramLevel level;
-    private TraineeEntity trainee;
+    private TraineeEntity creator;
     private OffsetTime time;
     private String location;
     private String image;
