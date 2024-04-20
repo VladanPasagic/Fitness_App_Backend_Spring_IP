@@ -1,5 +1,6 @@
 package etf.unibl.org.ip.ipbackend.services.implementations;
 
+import etf.unibl.org.ip.ipbackend.models.dtos.Participation;
 import etf.unibl.org.ip.ipbackend.models.dtos.SingleTrainingProgram;
 import etf.unibl.org.ip.ipbackend.models.dtos.TrainingProgram;
 import etf.unibl.org.ip.ipbackend.models.entities.*;
@@ -108,5 +109,10 @@ public class TrainingProgramServiceImpl implements TrainingProgramService {
         }
 
 
+    }
+
+    @Override
+    public List<Participation> getAllParticipation(int traineeId) {
+        return participationRepository.getParticipationEntitiesByTraineeId(traineeId).stream().map(p -> modelMapper.map(p, Participation.class)).toList();
     }
 }

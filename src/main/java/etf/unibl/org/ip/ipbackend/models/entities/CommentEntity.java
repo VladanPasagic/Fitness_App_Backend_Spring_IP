@@ -13,13 +13,13 @@ public class CommentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
+    @ManyToOne
     private UserEntity user;
 
     private String comment;
 
     private Date date;
 
-    @OneToOne
+    @ManyToOne
     private TrainingProgramEntity trainingProgram;
 }

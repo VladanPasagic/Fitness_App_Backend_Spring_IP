@@ -1,5 +1,7 @@
 package etf.unibl.org.ip.ipbackend.controllers;
 
+import etf.unibl.org.ip.ipbackend.models.dtos.Comment;
+import etf.unibl.org.ip.ipbackend.models.dtos.Participation;
 import etf.unibl.org.ip.ipbackend.models.dtos.SingleTrainingProgram;
 import etf.unibl.org.ip.ipbackend.models.dtos.TrainingProgram;
 import etf.unibl.org.ip.ipbackend.models.requests.CommentRequest;
@@ -47,16 +49,27 @@ public class TrainingProgramController {
         trainingProgramService.save(trainingProgramRequest);
     }
 
+    @GetMapping("/{id}/comments")
+    public List<Comment> getCommentsOnTrainingProgram(@PathVariable String id) {
+        return commentService.getAllCommentsOnTrainingProgram(Integer.parseInt(id));
+    }
+
     @PostMapping("/{id}/comments")
     @ResponseStatus(HttpStatus.CREATED)
     public void addCommentToTrainingProgram(@RequestBody @Valid CommentRequest commentRequest, @PathVariable String id) {
-        commentService.addComment(commentRequest);
+        commentService.addComment(id, commentRequest);
     }
 
-    @PostMapping
-    @RequestMapping("/participate/{id}")
+    @PostMapping("/participate/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
     public void participateOnTrainingProgram(@PathVariable String id, @RequestBody @Valid ParticipationRequest participationRequest) {
         trainingProgramService.participate(participationRequest.getUserId(), Integer.parseInt(id));
     }
+
+    @GetMapping("/participate/{id}")
+    public List<Participation> getParticipation(@PathVariable String id) {
+        return trainingProgramService.getAllParticipation(Integer.parseInt(id));
+    }
+
 
 }

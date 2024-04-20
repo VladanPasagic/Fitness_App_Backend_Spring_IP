@@ -31,7 +31,7 @@ public class TrainingProgramEntity {
 
     private OffsetTime time;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private LocationEntity location;
 
     private boolean active;
@@ -41,7 +41,4 @@ public class TrainingProgramEntity {
     private String instructorInformation;
 
     private String contactNumber;
-
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<CommentEntity> comments;
 }

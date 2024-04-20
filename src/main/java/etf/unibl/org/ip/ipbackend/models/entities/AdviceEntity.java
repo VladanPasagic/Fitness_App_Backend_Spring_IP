@@ -15,7 +15,7 @@ public class AdviceEntity {
 
     private String text;
 
-    @OneToOne
+    @ManyToOne
     private UserEntity user;
 
     private boolean isRead;
