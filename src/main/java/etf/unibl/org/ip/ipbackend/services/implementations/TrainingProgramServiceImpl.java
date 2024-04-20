@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -103,6 +104,7 @@ public class TrainingProgramServiceImpl implements TrainingProgramService {
         if (trainingProgramEntity.isPresent() && traineeEntity.isPresent()) {
             entity.setTrainingProgram(trainingProgramEntity.get());
             entity.setTrainee(traineeEntity.get());
+            entity.setDate(new Date(System.currentTimeMillis()));
             participationRepository.save(entity);
         } else {
             throw new ResponseStatusException(HttpStatusCode.valueOf(404));
