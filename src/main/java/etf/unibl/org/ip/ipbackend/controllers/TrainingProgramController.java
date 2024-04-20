@@ -31,8 +31,7 @@ public class TrainingProgramController {
         return trainingProgramService.getAll();
     }
 
-    @GetMapping
-    @RequestMapping("/{id}")
+    @GetMapping("/{id}")
     public SingleTrainingProgram getTrainingProgram(@PathVariable int id) {
         return trainingProgramService.getById(id);
     }
