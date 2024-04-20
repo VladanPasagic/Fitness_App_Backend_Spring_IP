@@ -16,7 +16,7 @@ public class SingleTrainingProgram {
     private ProgramLevel level;
     private TraineeEntity creator;
     private OffsetTime time;
-    private String location;
+    private Location location;
     private String image;
     private String instructorInformation;
     private String contactNumber;

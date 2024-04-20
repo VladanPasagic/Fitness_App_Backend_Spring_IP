@@ -53,12 +53,6 @@ public class TrainingProgramController {
         commentService.addComment(commentRequest);
     }
 
-    @GetMapping
-    @RequestMapping("/creator/{id}")
-    public List<TrainingProgram> getTrainingPrograms(@PathVariable String id) {
-        return trainingProgramService.getAllFromTrainee(Integer.parseInt(id));
-    }
-
     @PostMapping
     @RequestMapping("/participate/{id}")
     public void participateOnTrainingProgram(@PathVariable String id, @RequestBody @Valid ParticipationRequest participationRequest) {
