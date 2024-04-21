@@ -12,6 +12,8 @@ import etf.unibl.org.ip.ipbackend.services.TrainingProgramService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,11 +26,10 @@ import java.util.List;
 public class TrainingProgramController {
     private final TrainingProgramService trainingProgramService;
     private final CommentService commentService;
-    private final ModelMapper modelMapper;
 
     @GetMapping
-    public List<TrainingProgram> getTrainingPrograms() {
-        return trainingProgramService.getAll();
+    public Page<TrainingProgram> getTrainingPrograms(Pageable page) {
+        return trainingProgramService.getAll(page);
     }
 
     @GetMapping("/{id}")
@@ -38,8 +39,8 @@ public class TrainingProgramController {
 
     @GetMapping
     @RequestMapping("/creator/{id}")
-    public List<TrainingProgram> getTrainingProgramsByCreatorId(@PathVariable String id) {
-        return trainingProgramService.getAllFromTrainee(Integer.parseInt(id));
+    public Page<TrainingProgram> getTrainingProgramsByCreatorId(@PathVariable String id, Pageable page) {
+        return trainingProgramService.getAllFromTrainee(page, Integer.parseInt(id));
     }
 
     @PostMapping

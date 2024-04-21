@@ -14,6 +14,8 @@ import etf.unibl.org.ip.ipbackend.services.TrainingProgramService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.logging.LogLevel;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -36,13 +38,13 @@ public class TrainingProgramServiceImpl implements TrainingProgramService {
     private final ModelMapper modelMapper;
 
     @Override
-    public List<TrainingProgram> getAll() {
-        return trainingProgramRepository.findAllByActiveIsTrue().stream().map(tp -> modelMapper.map(tp, TrainingProgram.class)).toList();
+    public Page<TrainingProgram> getAll(Pageable page) {
+        return trainingProgramRepository.findAllByActiveIsTrue(page).map(tp -> modelMapper.map(tp, TrainingProgram.class));
     }
 
     @Override
-    public List<TrainingProgram> getAllFromTrainee(int id) {
-        return trainingProgramRepository.findAllByCreatorIdAndActiveIsTrue(id).stream().map(tp -> modelMapper.map(tp, TrainingProgram.class)).toList();
+    public Page<TrainingProgram> getAllFromTrainee(Pageable page, int id) {
+        return trainingProgramRepository.findAllByCreatorIdAndActiveIsTrue(id, page).map(tp -> modelMapper.map(tp, TrainingProgram.class));
     }
 
 

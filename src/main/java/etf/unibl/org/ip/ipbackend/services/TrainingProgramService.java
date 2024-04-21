@@ -5,15 +5,17 @@ import etf.unibl.org.ip.ipbackend.models.dtos.SingleTrainingProgram;
 import etf.unibl.org.ip.ipbackend.models.dtos.TrainingProgram;
 import etf.unibl.org.ip.ipbackend.models.requests.TrainingProgramRequest;
 import jakarta.mail.Part;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.io.IOException;
 import java.util.List;
 
 public interface TrainingProgramService {
 
-    List<TrainingProgram> getAll();
+    Page<TrainingProgram> getAll(Pageable page);
 
-    List<TrainingProgram> getAllFromTrainee(int id);
+    Page<TrainingProgram> getAllFromTrainee(Pageable page, int id);
 
     SingleTrainingProgram getById(int id);
 
