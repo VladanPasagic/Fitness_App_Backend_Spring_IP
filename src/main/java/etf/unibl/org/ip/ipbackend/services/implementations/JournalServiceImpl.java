@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,6 +57,7 @@ public class JournalServiceImpl implements JournalService {
             loggingService.log(LogLevel.WARN, "User with id " + userId + " not found");
             throw new ResponseStatusException(HttpStatusCode.valueOf(404));
         }
+        journalEntity.setDate(new Date(System.currentTimeMillis()));
         journalRepository.save(journalEntity);
     }
 }

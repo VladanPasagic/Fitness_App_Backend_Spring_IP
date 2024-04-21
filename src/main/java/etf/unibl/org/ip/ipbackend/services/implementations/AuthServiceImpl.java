@@ -7,6 +7,8 @@ import etf.unibl.org.ip.ipbackend.respositories.TraineeRepository;
 import etf.unibl.org.ip.ipbackend.services.AuthService;
 import etf.unibl.org.ip.ipbackend.services.LoggingService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.logging.LogLevel;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;

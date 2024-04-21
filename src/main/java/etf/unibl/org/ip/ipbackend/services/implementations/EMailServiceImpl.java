@@ -10,6 +10,7 @@ import com.sendgrid.helpers.mail.objects.Email;
 import etf.unibl.org.ip.ipbackend.models.requests.EMailRequest;
 import etf.unibl.org.ip.ipbackend.services.EMailService;
 import etf.unibl.org.ip.ipbackend.services.LoggingService;
+import etf.unibl.org.ip.ipbackend.services.ProfileService;
 import etf.unibl.org.ip.ipbackend.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +23,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class EMailServiceImpl implements EMailService {
 
-    private final UserService userService;
+    private final ProfileService userService;
     private final LoggingService loggingService;
 
     @Value("${mail.api.key}")

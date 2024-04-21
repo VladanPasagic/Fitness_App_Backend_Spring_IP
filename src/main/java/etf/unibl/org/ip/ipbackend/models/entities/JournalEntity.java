@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -26,4 +28,6 @@ public class JournalEntity {
     private ProgramLevel intensity;
 
     private int result;
+
+    private Date date;
 }

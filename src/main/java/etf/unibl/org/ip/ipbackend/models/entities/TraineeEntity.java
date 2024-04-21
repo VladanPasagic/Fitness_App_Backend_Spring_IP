@@ -16,4 +16,6 @@ public class TraineeEntity extends UserEntity {
     private String mail;
 
     private String city;
+
+    private boolean isVerified;
 }

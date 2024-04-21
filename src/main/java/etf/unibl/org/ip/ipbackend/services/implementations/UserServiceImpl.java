@@ -2,12 +2,14 @@ package etf.unibl.org.ip.ipbackend.services.implementations;
 
 import etf.unibl.org.ip.ipbackend.models.dtos.Profile;
 import etf.unibl.org.ip.ipbackend.models.entities.TraineeEntity;
+import etf.unibl.org.ip.ipbackend.models.entities.VerificationEntity;
 import etf.unibl.org.ip.ipbackend.models.requests.ProfileUpdateRequest;
 import etf.unibl.org.ip.ipbackend.models.requests.RegistrationRequest;
 import etf.unibl.org.ip.ipbackend.respositories.TraineeRepository;
 import etf.unibl.org.ip.ipbackend.services.LoggingService;
 import etf.unibl.org.ip.ipbackend.services.StorageAccessService;
 import etf.unibl.org.ip.ipbackend.services.UserService;
+import etf.unibl.org.ip.ipbackend.services.VerificationService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.logging.LogLevel;
@@ -26,6 +28,7 @@ public class UserServiceImpl implements UserService {
     private final ModelMapper modelMapper;
     private final StorageAccessService storageAccessService;
     private final LoggingService loggingService;
+    private final VerificationService verificationService;
 
     @Override
     public void register(RegistrationRequest request) throws ResponseStatusException, IOException {
@@ -39,6 +42,7 @@ public class UserServiceImpl implements UserService {
             trainee.setAvatar(savedFilePath);
         }
         traineeRepository.saveAndFlush(trainee);
+        verificationService.createToken(trainee);
     }
 
     private TraineeEntity createUserEntity(RegistrationRequest request) {
@@ -65,18 +69,6 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
-    public Profile getProfile(Integer id) {
-        Optional<TraineeEntity> trainee = traineeRepository.findById(id);
-        if (trainee.isEmpty()) {
-            loggingService.log(LogLevel.INFO, "Trying to access non existent profile with the following id " + id);
-            throw new ResponseStatusException(HttpStatusCode.valueOf(204));
-        }
-        return getProfileFromTraineeEntity(trainee.get());
-    }
 
-    private Profile getProfileFromTraineeEntity(TraineeEntity traineeEntity) {
-        return modelMapper.map(traineeEntity, Profile.class);
-    }
 
 }
