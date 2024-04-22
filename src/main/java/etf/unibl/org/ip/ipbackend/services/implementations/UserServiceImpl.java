@@ -1,6 +1,7 @@
 package etf.unibl.org.ip.ipbackend.services.implementations;
 
 import etf.unibl.org.ip.ipbackend.models.dtos.Profile;
+import etf.unibl.org.ip.ipbackend.models.dtos.User;
 import etf.unibl.org.ip.ipbackend.models.entities.TraineeEntity;
 import etf.unibl.org.ip.ipbackend.models.entities.VerificationEntity;
 import etf.unibl.org.ip.ipbackend.models.requests.ProfileUpdateRequest;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -69,6 +71,10 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public List<User> getAllUsers() {
+        return traineeRepository.findAll().stream().map(u -> modelMapper.map(u, User.class)).toList();
+    }
 
 
 }
